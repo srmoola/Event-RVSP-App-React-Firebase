@@ -4,19 +4,29 @@ import ResponsiveAppBar from "./components/NavBar";
 import Events from "./components/Events";
 import { Button } from "@mui/material";
 import AddEventCard from "./components/EventAdd";
+import RemoveEvent from "./components/RemoveEvent";
 
-interface items {
-  id: string;
+export interface Items {
+  id?: string;
   name: string;
   location: string;
   descriptions: string;
-  image: string;
+  image?: any;
   date: string;
 }
 
 function App() {
-  const [components, setComponents] = useState<items[]>([]);
+  const [components, setComponents] = useState<Items[]>([]);
   const [addEvent, setaddEvent] = useState<boolean>(false);
+  const [removeEventToggle, setremoveEventToggle] = useState<boolean>(false);
+
+  const [eventName, seteventName] = useState<Items>({
+    name: "",
+    location: "",
+    descriptions: "",
+    date: "",
+  });
+
   // const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
   // useEffect(() => {
@@ -33,27 +43,29 @@ function App() {
   //   }
   // }, [components, dataLoaded]);
 
-  function addComponent() {
+  function addComponent(): void {
     setComponents([
       ...components,
       {
         id: crypto.randomUUID(),
-        name: "Event",
-        location: "Event",
-        descriptions: "event",
-        date: "event",
-        image:
-          "https://media.istockphoto.com/id/1093110112/photo/picturesque-morning-in-plitvice-national-park-colorful-spring-scene-of-green-forest-with-pure.jpg?s=612x612&w=0&k=20&c=lpQ1sQI49bYbTp9WQ_EfVltAqSP1DXg0Ia7APTjjxz4=",
+        name: eventName.name,
+        location: eventName.location,
+        descriptions: eventName.descriptions,
+        date: eventName.date,
       },
     ]);
   }
 
-  function addEventCardTemp() {
+  function addEventCardTemp(): void {
     setaddEvent(true);
   }
 
-  function cancelAddEventCard() {
+  function cancelAddEventCard(): void {
     setaddEvent(false);
+  }
+
+  function removeEventCardTemp(): void {
+    setremoveEventToggle(true);
   }
 
   return (
@@ -79,24 +91,37 @@ function App() {
       {addEvent && (
         <Container maxWidth="xl">
           <br></br>
-          <AddEventCard />
+          <AddEventCard
+            giveInfo={seteventName}
+            onClicks={addComponent}
+            hideCard={setaddEvent}
+          />
         </Container>
       )}
 
       {!addEvent ? (
-        <Button sx={{ marginTop: "10px" }} onClick={addEventCardTemp}>
-          Add Event
-        </Button>
+        <>
+          <Button sx={{ marginTop: "10px" }} onClick={addEventCardTemp}>
+            Add Event
+          </Button>
+
+          {components.length > 0 ? (
+            <Button sx={{ marginTop: "10px" }} onClick={removeEventCardTemp}>
+              Remove Events
+            </Button>
+          ) : (
+            ""
+          )}
+        </>
       ) : (
         <>
           <Button sx={{ marginTop: "10px" }} onClick={cancelAddEventCard}>
             Cancel Event
           </Button>
-          <Button sx={{ marginTop: "10px" }} onClick={addComponent}>
-            Add
-          </Button>
         </>
       )}
+
+      {removeEventToggle && <RemoveEvent getComponents={components} />}
     </Container>
   );
 }
