@@ -1,7 +1,8 @@
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
-
+import Typography from "@mui/material/Typography";
+import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
 import { Items } from "../App";
 
@@ -42,6 +43,8 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard }: Props) => {
           label="Event Name"
           placeholder="Event Name"
           variant="standard"
+          required
+          fullWidth
         />
         <br></br>
         <TextField
@@ -52,6 +55,8 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard }: Props) => {
           placeholder="Event Location"
           multiline
           variant="standard"
+          required
+          fullWidth
         />
         <br></br>
         <TextField
@@ -62,6 +67,8 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard }: Props) => {
           placeholder="Event Description"
           multiline
           variant="standard"
+          required
+          fullWidth
         />
         <br />
         <TextField
@@ -72,17 +79,21 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard }: Props) => {
           placeholder="Event Date"
           multiline
           variant="standard"
+          required
+          fullWidth
         />
       </CardContent>
       <Button
-        sx={{ marginTop: "10px" }}
+        fullWidth
+        sx={{ marginTop: "10px", height: "100px" }}
         onClick={(e) => {
           onClicks(e);
           hideCard(false);
           resetStates();
         }}
       >
-        Add
+        <AddIcon fontSize="large" />
+        <Typography fontSize="large">Confirm Add</Typography>
       </Button>
     </Card>
   );

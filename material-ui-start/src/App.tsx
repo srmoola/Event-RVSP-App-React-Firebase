@@ -4,7 +4,10 @@ import ResponsiveAppBar from "./components/NavBar";
 import Events from "./components/Events";
 import { Button } from "@mui/material";
 import AddEventCard from "./components/EventAdd";
-import RemoveEvent from "./components/RemoveEvent";
+import AddIcon from "@mui/icons-material/Add";
+import CancelIcon from "@mui/icons-material/Cancel";
+import CancelOverlay from "./components/CancelOverlay";
+import Typography from "@mui/material/Typography";
 
 export interface Items {
   id?: string;
@@ -18,8 +21,6 @@ export interface Items {
 function App() {
   const [components, setComponents] = useState<Items[]>([]);
   const [addEvent, setaddEvent] = useState<boolean>(false);
-  const [removeEventToggle, setremoveEventToggle] = useState<boolean>(false);
-
   const [eventName, seteventName] = useState<Items>({
     name: "",
     location: "",
@@ -64,16 +65,12 @@ function App() {
     setaddEvent(false);
   }
 
-  function removeEventCardTemp(): void {
-    setremoveEventToggle(true);
-  }
-
   return (
     <Container maxWidth="xl">
       <ResponsiveAppBar />
       <br></br>
 
-      <Container maxWidth="xl">
+      <div>
         {components.map((components) => (
           <div key={components.id}>
             <br />
@@ -86,42 +83,51 @@ function App() {
             />
           </div>
         ))}
-      </Container>
+      </div>
 
       {addEvent && (
-        <Container maxWidth="xl">
+        <div>
           <br></br>
           <AddEventCard
             giveInfo={seteventName}
             onClicks={addComponent}
             hideCard={setaddEvent}
           />
-        </Container>
+        </div>
       )}
 
       {!addEvent ? (
         <>
-          <Button sx={{ marginTop: "10px" }} onClick={addEventCardTemp}>
-            Add Event
+          <Button
+            fullWidth
+            sx={{ marginTop: "10px", height: "100px" }}
+            onClick={addEventCardTemp}
+            variant="outlined"
+          >
+            <AddIcon fontSize="large" />
+            <Typography fontSize="large">Add Event</Typography>
           </Button>
 
           {components.length > 0 ? (
-            <Button sx={{ marginTop: "10px" }} onClick={removeEventCardTemp}>
-              Remove Events
-            </Button>
+            <CancelOverlay
+              getComponents={components}
+              setgetComponents={setComponents}
+            />
           ) : (
             ""
           )}
         </>
       ) : (
-        <>
-          <Button sx={{ marginTop: "10px" }} onClick={cancelAddEventCard}>
-            Cancel Event
-          </Button>
-        </>
+        <Button
+          fullWidth
+          sx={{ marginTop: "10px", height: "100px" }}
+          onClick={cancelAddEventCard}
+          color="error"
+        >
+          <CancelIcon fontSize="large" />
+          <Typography fontSize="large"> Cancel Add</Typography>
+        </Button>
       )}
-
-      {removeEventToggle && <RemoveEvent getComponents={components} />}
     </Container>
   );
 }
