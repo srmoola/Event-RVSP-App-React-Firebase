@@ -44,6 +44,15 @@ function App() {
   //   }
   // }, [components, dataLoaded]);
 
+  const resetStates = () => {
+    seteventName({
+      name: "",
+      location: "",
+      descriptions: "",
+      date: "",
+    });
+  };
+
   function addComponent(): void {
     setComponents([
       ...components,
@@ -89,6 +98,7 @@ function App() {
         <div>
           <br></br>
           <AddEventCard
+            imageQuery={eventName.name}
             giveInfo={seteventName}
             onClicks={addComponent}
             hideCard={setaddEvent}
@@ -121,7 +131,10 @@ function App() {
         <Button
           fullWidth
           sx={{ marginTop: "10px", height: "100px" }}
-          onClick={cancelAddEventCard}
+          onClick={() => {
+            cancelAddEventCard();
+            resetStates();
+          }}
           color="error"
         >
           <CancelIcon fontSize="large" />

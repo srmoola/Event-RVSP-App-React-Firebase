@@ -4,15 +4,20 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import TextField from "@mui/material/TextField";
+import Box from "@mui/material/Box";
 import { Items } from "../App";
+import UnsplashImage from "./UnsplashImage";
 
 interface Props {
   onClicks: React.MouseEventHandler<HTMLButtonElement>;
   giveInfo: React.Dispatch<React.SetStateAction<Items>>;
   hideCard: React.Dispatch<React.SetStateAction<boolean>>;
+  imageQuery: string;
 }
 
-const AddEventCard = ({ onClicks, giveInfo, hideCard }: Props) => {
+const styles = { marginTop: "10px", width: "50%" };
+
+const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     giveInfo((prevState) => ({
@@ -32,57 +37,65 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard }: Props) => {
 
   return (
     <Card variant="outlined">
+      <Box
+        sx={{
+          float: "right",
+          display: "inline-block",
+          marginRight: { xl: "5%" },
+          marginTop: { xl: "1%" },
+        }}
+      >
+        <UnsplashImage query={imageQuery} />
+      </Box>
       <CardContent
         sx={{
           marginTop: { xs: "220px", md: "0px" },
         }}
       >
         <TextField
+          sx={{ width: styles.width }}
           onChange={handleInputChange}
           name="name"
           label="Event Name"
           placeholder="Event Name"
           variant="standard"
           required
-          fullWidth
         />
         <br></br>
         <TextField
           onChange={handleInputChange}
-          sx={{ marginTop: "10px" }}
+          sx={styles}
           name="location"
           label="Event Location"
           placeholder="Event Location"
           multiline
           variant="standard"
           required
-          fullWidth
         />
         <br></br>
         <TextField
           onChange={handleInputChange}
-          sx={{ marginTop: "10px" }}
+          sx={styles}
           name="descriptions"
           label="Event Description"
           placeholder="Event Description"
           multiline
           variant="standard"
           required
-          fullWidth
         />
         <br />
         <TextField
           onChange={handleInputChange}
-          sx={{ marginTop: "10px" }}
+          sx={styles}
           name="date"
           label="Event Date"
           placeholder="Event Date"
           multiline
           variant="standard"
           required
-          fullWidth
         />
       </CardContent>
+
       <Button
         fullWidth
         sx={{ marginTop: "10px", height: "100px" }}
