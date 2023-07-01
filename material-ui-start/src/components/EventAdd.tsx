@@ -13,11 +13,18 @@ interface Props {
   giveInfo: React.Dispatch<React.SetStateAction<Items>>;
   hideCard: React.Dispatch<React.SetStateAction<boolean>>;
   imageQuery: string;
+  setImageQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const styles = { marginTop: "10px", width: "50%" };
+const styles = { marginTop: "10px", width: { xs: "100%", xl: "50%" } };
 
-const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
+const AddEventCard = ({
+  onClicks,
+  giveInfo,
+  hideCard,
+  imageQuery,
+  setImageQuery,
+}: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     giveInfo((prevState) => ({
@@ -46,6 +53,7 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
         }}
       >
         <UnsplashImage query={imageQuery} />
+        {/* setURL={setImageQuery}  */}
       </Box>
       <CardContent
         sx={{
@@ -90,6 +98,17 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
           name="date"
           label="Event Date"
           placeholder="Event Date"
+          multiline
+          variant="standard"
+          required
+        />
+        <br />
+        <TextField
+          onChange={handleInputChange}
+          sx={styles}
+          name="image"
+          label="Image"
+          placeholder="Search for an image to use!"
           multiline
           variant="standard"
           required

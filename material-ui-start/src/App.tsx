@@ -26,7 +26,10 @@ function App() {
     location: "",
     descriptions: "",
     date: "",
+    image: "",
   });
+  const [imageQuery, setimageQuery] = useState<string>("");
+  console.log(imageQuery);
 
   // const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
@@ -50,6 +53,7 @@ function App() {
       location: "",
       descriptions: "",
       date: "",
+      image: "",
     });
   };
 
@@ -62,6 +66,7 @@ function App() {
         location: eventName.location,
         descriptions: eventName.descriptions,
         date: eventName.date,
+        image: imageQuery,
       },
     ]);
   }
@@ -98,7 +103,8 @@ function App() {
         <div>
           <br></br>
           <AddEventCard
-            imageQuery={eventName.name}
+            setImageQuery={setimageQuery}
+            imageQuery={eventName.image}
             giveInfo={seteventName}
             onClicks={addComponent}
             hideCard={setaddEvent}
