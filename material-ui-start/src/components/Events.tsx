@@ -20,9 +20,8 @@ const Events = ({ name, location, descriptions, image, date }: Props) => {
         component="img"
         sx={{
           float: "right",
-          height: "100%",
-          width: "100%",
-          maxWidth: { xs: "100%", xl: "25%" },
+          width: {xl: "40%", md: "40%", xs:"100%"},
+          
         }}
         alt="Event Image"
         src={image}

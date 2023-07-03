@@ -8,6 +8,8 @@ import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CancelOverlay from "./components/CancelOverlay";
 import Typography from "@mui/material/Typography";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+
 
 export interface Items {
   id?: string;
@@ -19,6 +21,8 @@ export interface Items {
 }
 
 function App() {
+  const imageurl = useSelector((state: any) => state.imageurl.value)
+
   const [components, setComponents] = useState<Items[]>([]);
   const [addEvent, setaddEvent] = useState<boolean>(false);
   const [eventName, seteventName] = useState<Items>({
@@ -29,9 +33,8 @@ function App() {
     image: "",
   });
   const [imageQuery, setimageQuery] = useState<string>("");
-  console.log(imageQuery);
 
-  // const [dataLoaded, setDataLoaded] = useState<boolean>(false);
+  const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
   // useEffect(() => {
   //   const storedComponents = localStorage.getItem("key");
@@ -66,7 +69,7 @@ function App() {
         location: eventName.location,
         descriptions: eventName.descriptions,
         date: eventName.date,
-        image: imageQuery,
+        image: imageurl,
       },
     ]);
   }
@@ -82,7 +85,7 @@ function App() {
   return (
     <Container maxWidth="xl">
       <ResponsiveAppBar />
-      <br></br>
+      <br />
 
       <div>
         {components.map((components) => (
@@ -103,7 +106,6 @@ function App() {
         <div>
           <br></br>
           <AddEventCard
-            setImageQuery={setimageQuery}
             imageQuery={eventName.image}
             giveInfo={seteventName}
             onClicks={addComponent}
@@ -147,6 +149,7 @@ function App() {
           <Typography fontSize="large"> Cancel Add</Typography>
         </Button>
       )}
+
     </Container>
   );
 }

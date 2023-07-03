@@ -3,14 +3,14 @@ import { createApi } from "unsplash-js";
 import Typography from "@mui/material/Typography";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import Box from "@mui/material/Box";
-
+import { useDispatch } from "react-redux";
+import { setImageUrl } from "../features/image.ts"
 type Photo = {
   query?: string;
 };
 
 type Url = {
   urls: { large: string; regular: string; raw: string; small: string };
-  setURL: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const api = createApi({
@@ -18,6 +18,14 @@ const api = createApi({
 });
 
 const PhotoComp: React.FC<{ photo: Url }> = ({ photo }) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (photo && photo.urls) {
+      dispatch(setImageUrl(photo.urls.small));
+    }
+  }, [dispatch, photo]);
+
   if (!photo || !photo.urls) {
     return (
       <Box
@@ -39,12 +47,9 @@ const PhotoComp: React.FC<{ photo: Url }> = ({ photo }) => {
 
   const { urls } = photo;
 
-  // setURL(urls.small);
-
   return (
     <>
       <img className="img" src={urls.small} alt="Unsplash" />
-      {console.log(urls.small)}
     </>
   );
 };

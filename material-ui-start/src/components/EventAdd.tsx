@@ -13,7 +13,6 @@ interface Props {
   giveInfo: React.Dispatch<React.SetStateAction<Items>>;
   hideCard: React.Dispatch<React.SetStateAction<boolean>>;
   imageQuery: string;
-  setImageQuery: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const styles = { marginTop: "10px", width: { xs: "100%", xl: "50%" } };
@@ -23,7 +22,6 @@ const AddEventCard = ({
   giveInfo,
   hideCard,
   imageQuery,
-  setImageQuery,
 }: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
