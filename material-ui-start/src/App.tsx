@@ -32,8 +32,7 @@ function App() {
     date: "",
     image: "",
   });
-  const [imageQuery, setimageQuery] = useState<string>("");
-
+  
   const [dataLoaded, setDataLoaded] = useState<boolean>(false);
 
   // useEffect(() => {
