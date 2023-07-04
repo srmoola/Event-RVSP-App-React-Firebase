@@ -9,8 +9,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import CancelOverlay from "./components/CancelOverlay";
 import Typography from "@mui/material/Typography";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { firestore } from "./firebase";
-import { addDoc, collection } from "firebase/firestore";
+
+
 
 export interface Items {
   id?: string;
@@ -34,33 +34,18 @@ function App() {
     image: "",
   });
 
-  const [dataLoaded, setDataLoaded] = useState<boolean>(false);
+  const [shouldRender, setShouldRender] = useState(false);
 
-  const ref = collection(firestore, "componentdata");
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShouldRender(true);
+    }, 500);
 
-  // useEffect(() => {
-  //   const storedComponents = localStorage.getItem("key");
-  //   if (storedComponents) {
-  //     setComponents(JSON.parse(storedComponents));
-  //   }
-  //   setDataLoaded(true);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (dataLoaded) {
-  //     localStorage.setItem("key", JSON.stringify(components));
-  //   }
-  // }, [components, dataLoaded]);
-
-  const sendComponentsToFirebase = () => {
-    const componentsString: object = { value: components };
-
-    try {
-      addDoc(ref, componentsString);
-    } catch (e) {
-      console.log(e);
-    }
-  };
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+  
 
   const resetStates = () => {
     seteventName({
@@ -146,15 +131,7 @@ function App() {
           ) : (
             ""
           )}
-          <Button
-            fullWidth
-            sx={{ marginTop: "10px", height: "100px" }}
-            onClick={sendComponentsToFirebase}
-            variant="outlined"
-          >
-            <AddIcon fontSize="large" />
-            <Typography fontSize="large">Save Events</Typography>
-          </Button>
+          
         </>
       ) : (
         <Button
@@ -170,6 +147,7 @@ function App() {
           <Typography fontSize="large"> Cancel Add</Typography>
         </Button>
       )}
+  
     </Container>
   );
 }
