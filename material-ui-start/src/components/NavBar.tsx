@@ -13,8 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 
-const pages: string[] = ["Home", "About", "Groups"];
-const settings: string[] = ["Profile", "Account", "Dashboard", "Logout"];
+const settings: string[] = ["Profile", "Log In"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -93,11 +92,15 @@ function ResponsiveAppBar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Button>Home</Button>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Button>About</Button>
+              </MenuItem>
+              <MenuItem onClick={handleCloseNavMenu}>
+                <Button>Groups</Button>
+              </MenuItem>
             </Menu>
           </Box>
           <TipsAndUpdatesOutlinedIcon
@@ -122,16 +125,27 @@ function ResponsiveAppBar() {
             Event App
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                href="#"
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
-              >
-                {page}
-              </Button>
-            ))}
+            <Button
+              href="#"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Home
+            </Button>
+            <Button
+              href="#"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              About
+            </Button>
+            <Button
+              href="#"
+              onClick={handleCloseNavMenu}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Groups
+            </Button>
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
@@ -156,11 +170,9 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Typography textAlign="center">Log In</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
