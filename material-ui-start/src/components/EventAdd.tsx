@@ -59,6 +59,7 @@ const AddEventCard = ({
         }}
       >
         <TextField
+          id = "1"
           sx={{ width: styles.width }}
           onChange={handleInputChange}
           name="name"
@@ -69,6 +70,7 @@ const AddEventCard = ({
         />
         <br></br>
         <TextField
+          id = "2"
           onChange={handleInputChange}
           sx={styles}
           name="location"
@@ -80,6 +82,7 @@ const AddEventCard = ({
         />
         <br></br>
         <TextField
+          id = "3"
           onChange={handleInputChange}
           sx={styles}
           name="descriptions"
@@ -91,6 +94,7 @@ const AddEventCard = ({
         />
         <br />
         <TextField
+          id = "4"
           onChange={handleInputChange}
           sx={styles}
           name="date"
@@ -102,6 +106,7 @@ const AddEventCard = ({
         />
         <br />
         <TextField
+          id = "5"
           onChange={handleInputChange}
           sx={styles}
           name="image"
