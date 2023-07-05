@@ -146,14 +146,21 @@ function ResponsiveAppBar() {
             >
               Groups
             </Button>
-          </Box>
 
+          </Box>
+          {auth.currentUser === null ? <Button
+            href="#"
+            onClick={signInWithGoogle}
+            sx={{ my: 2, color: "white", display: { xl: "block", md: "block", xs: "none" }, float: "right", marginRight: "10px" }}
+          >
+            Log In
+          </Button> : ""}
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src={auth?.currentUser?.photoURL || undefined} />
               </IconButton>
-              
+
             </Tooltip>
             <Menu
               sx={{ mt: "45px" }}
@@ -171,12 +178,13 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={signInWithGoogle}>
+              {auth.currentUser === null ? <MenuItem onClick={signInWithGoogle}>
                 <Typography textAlign="center">Log In</Typography>
-              </MenuItem>
-              <MenuItem onClick={logout}>
+              </MenuItem> : <MenuItem onClick={logout}>
                 <Typography textAlign="center">Log Out</Typography>
-              </MenuItem>
+              </MenuItem>}
+
+
             </Menu>
           </Box>
         </Toolbar>
