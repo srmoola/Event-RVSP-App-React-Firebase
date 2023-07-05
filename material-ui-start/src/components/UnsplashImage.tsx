@@ -4,7 +4,7 @@ import Typography from "@mui/material/Typography";
 import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
-import { setImageUrl } from "../features/image.ts"
+import { setImageUrl } from "../features/image.ts";
 type Photo = {
   query?: string;
 };
@@ -27,22 +27,7 @@ const PhotoComp: React.FC<{ photo: Url }> = ({ photo }) => {
   }, [dispatch, photo]);
 
   if (!photo || !photo.urls) {
-    return (
-      <Box
-        style={{
-          backgroundColor: "#d9e5ef",
-          width: "400px",
-          height: "250px",
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        <InsertPhotoIcon fontSize="large" />
-        <Typography fontSize="large">
-          Type in an event name to get an image!
-        </Typography>
-      </Box>
-    );
+    return null;
   }
 
   const { urls } = photo;
@@ -69,22 +54,7 @@ const UnsplashImage = ({ query = "" }: Photo) => {
   }, [query]);
 
   if (data === null && query.length < 10) {
-    return (
-      <Box
-        style={{
-          backgroundColor: "#d9e5ef",
-          width: "400px",
-          height: "250px",
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        <InsertPhotoIcon fontSize="large" />
-        <Typography fontSize="large">
-          Type in an event name to get an image!
-        </Typography>
-      </Box>
-    );
+    return null;
   }
 
   if (data != null && query.length > 0) {

@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Items } from "../App";
 import UnsplashImage from "./UnsplashImage";
+import UnsplashImageLoad from "./UnsplashImageLoad";
 
 interface Props {
   onClicks: React.MouseEventHandler<HTMLButtonElement>;
@@ -17,12 +18,7 @@ interface Props {
 
 const styles = { marginTop: "10px", width: { xs: "100%", xl: "50%" } };
 
-const AddEventCard = ({
-  onClicks,
-  giveInfo,
-  hideCard,
-  imageQuery,
-}: Props) => {
+const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     giveInfo((prevState) => ({
@@ -47,10 +43,14 @@ const AddEventCard = ({
           float: "right",
           display: "inline-block",
           marginRight: { xl: "5%" },
-          marginTop: { xl: "1%" },
+          marginTop: { xl: "3%" },
         }}
       >
-        <UnsplashImage query={imageQuery} />
+        {imageQuery.length < 1 ? (
+          <UnsplashImageLoad />
+        ) : (
+          <UnsplashImage query={imageQuery} />
+        )}
         {/* setURL={setImageQuery}  */}
       </Box>
       <CardContent
@@ -59,7 +59,7 @@ const AddEventCard = ({
         }}
       >
         <TextField
-          id = "1"
+          id="1"
           sx={{ width: styles.width }}
           onChange={handleInputChange}
           name="name"
@@ -70,7 +70,7 @@ const AddEventCard = ({
         />
         <br></br>
         <TextField
-          id = "2"
+          id="2"
           onChange={handleInputChange}
           sx={styles}
           name="location"
@@ -82,7 +82,7 @@ const AddEventCard = ({
         />
         <br></br>
         <TextField
-          id = "3"
+          id="3"
           onChange={handleInputChange}
           sx={styles}
           name="descriptions"
@@ -94,7 +94,7 @@ const AddEventCard = ({
         />
         <br />
         <TextField
-          id = "4"
+          id="4"
           onChange={handleInputChange}
           sx={styles}
           name="date"
@@ -106,7 +106,7 @@ const AddEventCard = ({
         />
         <br />
         <TextField
-          id = "5"
+          id="5"
           onChange={handleInputChange}
           sx={styles}
           name="image"

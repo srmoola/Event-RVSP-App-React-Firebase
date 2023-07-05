@@ -17,10 +17,11 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import Checkbox from "@mui/material/Checkbox";
 import { useState } from "react";
 import { Items } from "../App";
+import { deleteDoc, collection, doc } from "firebase/firestore";
+import { firestore } from "../firebase";
 
 interface Props {
   getComponents: Items[];
-  setgetComponents: React.Dispatch<React.SetStateAction<Items[]>>;
 }
 
 const Transition = React.forwardRef(function Transition(
@@ -32,10 +33,9 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function CancelOverlay({
-  getComponents,
-  setgetComponents,
-}: Props) {
+const eventFireBaseRef = collection(firestore, "EventList");
+
+export default function CancelOverlay({ getComponents }: Props) {
   const [open, setOpen] = React.useState(false);
   const [checked, setChecked] = useState<string[]>([]);
 
@@ -58,11 +58,11 @@ export default function CancelOverlay({
   };
 
   const deleteEvents = () => {
-    setgetComponents((prevComponents) =>
-      prevComponents.filter(
-        (component) => component.id && !checked.includes(component.id)
-      )
-    );
+    checked.map((id: string) => {
+      const eventDoc = doc(eventFireBaseRef, id);
+      deleteDoc(eventDoc);
+    });
+    window.location.reload();
   };
 
   return (
@@ -75,7 +75,7 @@ export default function CancelOverlay({
         color="error"
       >
         <CancelIcon fontSize="large" />
-        <Typography fontSize="large"> Cancel Events</Typography>
+        <Typography fontSize="large"> Remove Events</Typography>
       </Button>
       <Dialog
         fullScreen
@@ -94,10 +94,17 @@ export default function CancelOverlay({
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Cancel Events Menu
+              Remove Events Menu
             </Typography>
-            <Button autoFocus color="inherit" onClick={deleteEvents}>
-              Confirm Cancel
+            <Button
+              autoFocus
+              color="inherit"
+              onClick={() => {
+                deleteEvents();
+                handleClose();
+              }}
+            >
+              Confirm
             </Button>
           </Toolbar>
         </AppBar>
