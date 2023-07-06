@@ -4,7 +4,7 @@ import {getFirestore} from "@firebase/firestore"
 import {getAuth, GoogleAuthProvider} from "firebase/auth"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAL00ueSe9rMSEXufpbLpjMcw9Oc7tWsZs",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: "event-rsvp-application.firebaseapp.com",
   projectId: "event-rsvp-application",
   storageBucket: "event-rsvp-application.appspot.com",

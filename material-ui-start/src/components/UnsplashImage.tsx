@@ -12,7 +12,7 @@ type Url = {
 };
 
 const api = createApi({
-  accessKey: "JELp8mEy_Qroy8AJH8K_fU7gI9xSdxOSDD6HDd9JR_8",
+  accessKey: import.meta.env.VITE_UNSPLASH_API_KEY,
 });
 
 const PhotoComp: React.FC<{ photo: Url }> = ({ photo }) => {
