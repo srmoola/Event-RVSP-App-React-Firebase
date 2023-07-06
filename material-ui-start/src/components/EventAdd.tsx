@@ -16,7 +16,7 @@ interface Props {
   imageQuery: string;
 }
 
-const styles = { marginTop: "10px", width: { xs: "100%", xl: "50%" } };
+const styles = { marginTop: "10px", width: { xs: "100%", xl: "50%", md: "50%" } };
 
 const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +51,6 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
         ) : (
           <UnsplashImage query={imageQuery} />
         )}
-        {/* setURL={setImageQuery}  */}
       </Box>
       <CardContent
         sx={{

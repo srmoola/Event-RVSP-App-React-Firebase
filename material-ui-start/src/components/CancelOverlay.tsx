@@ -38,6 +38,7 @@ const eventFireBaseRef = collection(firestore, "EventList");
 export default function CancelOverlay({ getComponents }: Props) {
   const [open, setOpen] = React.useState(false);
   const [checked, setChecked] = useState<string[]>([]);
+  console.log(checked);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,11 +59,17 @@ export default function CancelOverlay({ getComponents }: Props) {
   };
 
   const deleteEvents = () => {
+
     checked.map((id: string) => {
       const eventDoc = doc(eventFireBaseRef, id);
-      deleteDoc(eventDoc);
+      deleteDoc(eventDoc)
+        .then(() => {
+          window.location.reload();
+        })
+        .catch(error => {
+          console.log(error);
+        })
     });
-    window.location.reload();
   };
 
   return (

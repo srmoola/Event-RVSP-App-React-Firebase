@@ -2,8 +2,8 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import SignUp from "./SignUp";
 
 interface Props {
   name: string;
@@ -33,7 +33,7 @@ const Events = ({ name, location, descriptions, image, date }: Props) => {
           width: { xs: "90", md: "45%" },
         }}
       >
-        <Typography variant="h5" component="div">
+        <Typography sx={{marginTop:{xs: "50px", md: "0", xl: "0"}}} variant="h5" component="div">
           {name}
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -41,10 +41,8 @@ const Events = ({ name, location, descriptions, image, date }: Props) => {
         </Typography>
         <Typography variant="body2">{descriptions}</Typography>
       </CardContent>
-      <CardActions>
-        <Button sx={{ float: "bottom", marginTop: "auto" }} size="large">
-          {date + " - Sign Up"}
-        </Button>
+      <CardActions sx={{marginTop: {xl: "14%", md: "14%"}}}>
+        <SignUp description={descriptions} eventName= {name} cta={date + " - Sign Up"}/>
       </CardActions>
     </Card>
   );

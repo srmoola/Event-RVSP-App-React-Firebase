@@ -5,9 +5,11 @@ import Events from "./components/Events";
 import AddEventCard from "./components/EventAdd";
 import { useSelector } from "react-redux/es/hooks/useSelector";
 import { addDoc, collection, getDocs } from "firebase/firestore";
-import { firestore } from "./firebase";
+import { auth, firestore } from "./firebase";
 import AddEventHandler from "./components/AddEventHandler";
 import CancelEventHandler from "./components/CancelEventHandler";
+import Skeleton from '@mui/material/Skeleton';
+import SkeletonLoad from "./components/SkeletonLoad";
 
 export interface Items {
   id?: string;
@@ -17,6 +19,8 @@ export interface Items {
   image?: any;
   date: string;
 }
+
+
 
 function App() {
   const imageurl = useSelector((state: any) => state.imageurl.value);
@@ -31,7 +35,9 @@ function App() {
   });
   const [eventList, setEventList] = useState<any>([]);
   const [shouldRender, setShouldRender] = useState(false);
-  const admins: string[] = ["smoolagani@gmail.com"];
+  const admins: string[] = ["smoolagani@gmail.com", "bigfishdev12@gmail.com"];
+  const [loading, setLoading] = useState(true);
+  const skeletonCards: number[] = [0, 1, 2, 3];
 
   const getEventList = async () => {
     try {
@@ -47,9 +53,29 @@ function App() {
   };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getDocs(eventFireBaseRef);
+        const filteredData = data.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+        }));
+        setEventList(filteredData);
+        setTimeout(() => {
+          setLoading(false); // Set loading to false after data is fetched and delay is over
+        }, 1500); // Delay of 1 second (1000 milliseconds)
+      } catch (err) {
+        console.error(err);
+        setLoading(false); // Set loading to false in case of an error
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
       setShouldRender(!shouldRender);
-      getEventList();
     }, 500);
 
     return () => {
@@ -97,15 +123,13 @@ function App() {
       <ResponsiveAppBar />
       <br />
       <div>
-        {eventList.map(
-          (components: {
-            id: Key | null | undefined;
-            name: string;
-            location: string;
-            descriptions: string;
-            image: string;
-            date: string;
-          }) => (
+        {loading ? (
+          skeletonCards.map(() => (
+            <SkeletonLoad key={crypto.randomUUID()} />
+          ))
+        ) : (
+          // Render event cards once data is loaded
+          eventList.map((components: { id: Key | null | undefined; name: string; location: string; descriptions: string; image: string; date: string; }) => (
             <div key={components.id}>
               <br />
               <Events
@@ -116,9 +140,11 @@ function App() {
                 date={components.date}
               />
             </div>
-          )
+          ))
         )}
       </div>
+
+
 
       {addEvent && (
         <AddEventCard
@@ -129,14 +155,16 @@ function App() {
         />
       )}
 
-      {!addEvent ? (
+      {admins.includes(auth.currentUser?.email || "") ? <div>{!addEvent ? (
         <AddEventHandler showAddCard={addEventCardTemp} eventList={eventList} />
       ) : (
         <CancelEventHandler
           cancelAddEventCard={cancelAddEventCard}
           resetStates={resetStates}
         />
-      )}
+      )}</div> : null}
+
+
     </Container>
   );
 }
