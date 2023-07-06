@@ -37,6 +37,8 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
   };
 
   return (
+    <>
+    <br />
     <Card variant="outlined">
       <Box
         sx={{
@@ -46,10 +48,10 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
           marginTop: { xl: "3%" },
         }}
       >
-        {imageQuery.length < 1 ? (
-          <UnsplashImageLoad />
-        ) : (
+        {imageQuery && imageQuery.length > 0 ? (
           <UnsplashImage query={imageQuery} />
+        ) : (
+          <UnsplashImageLoad />
         )}
       </Box>
       <CardContent
@@ -130,6 +132,7 @@ const AddEventCard = ({ onClicks, giveInfo, hideCard, imageQuery }: Props) => {
         <Typography fontSize="large">Confirm Add</Typography>
       </Button>
     </Card>
+    </>
   );
 };
 
