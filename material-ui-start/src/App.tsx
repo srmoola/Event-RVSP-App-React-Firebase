@@ -8,7 +8,6 @@ import { addDoc, collection, getDocs } from "firebase/firestore";
 import { auth, firestore } from "./firebase";
 import AddEventHandler from "./components/AddEventHandler";
 import CancelEventHandler from "./components/CancelEventHandler";
-import Skeleton from '@mui/material/Skeleton';
 import SkeletonLoad from "./components/SkeletonLoad";
 
 export interface Items {

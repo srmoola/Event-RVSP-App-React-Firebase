@@ -38,7 +38,6 @@ const eventFireBaseRef = collection(firestore, "EventList");
 export default function CancelOverlay({ getComponents }: Props) {
   const [open, setOpen] = React.useState(false);
   const [checked, setChecked] = useState<string[]>([]);
-  console.log(checked);
 
   const handleClickOpen = () => {
     setOpen(true);

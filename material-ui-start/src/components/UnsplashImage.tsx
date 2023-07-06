@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { createApi } from "unsplash-js";
-import Typography from "@mui/material/Typography";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
-import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
 import { setImageUrl } from "../features/image.ts";
+
 type Photo = {
   query?: string;
 };
