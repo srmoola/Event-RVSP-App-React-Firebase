@@ -1,7 +1,16 @@
-:root{
-  background-color: #4280af33;
+
+@media (prefers-color-scheme: dark) {
+  :root{
+    background-color: #29355997;
+  }
 }
 
+/* Media query for light mode */
+@media (prefers-color-scheme: light) {
+  :root{
+    background-color: #fdfcfc;
+  }
+}
 *{
   margin: 0;
   padding: 0;

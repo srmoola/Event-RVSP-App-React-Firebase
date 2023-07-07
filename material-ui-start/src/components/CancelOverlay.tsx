@@ -89,7 +89,7 @@ export default function CancelOverlay({ getComponents }: Props) {
         onClose={handleClose}
         TransitionComponent={Transition}
       >
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar sx={{ position: "relative", backgroundColor: "#8c1515"}}>
           <Toolbar>
             <IconButton
               edge="start"

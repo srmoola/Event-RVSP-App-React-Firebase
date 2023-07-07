@@ -13,11 +13,13 @@ const AddEventHandler = ({ showAddCard, eventList }: Props) => {
     <>
       <Button
         fullWidth
-        sx={{ marginTop: "10px", height: "100px" }}
+        sx={{ marginTop: "10px", height: "100px", color: "#8c1515", borderColor: "#8c1515"}}
+        color="error"
         onClick={() => {
           showAddCard();
         }}
         variant="outlined"
+        
       >
         <AddIcon fontSize="large" />
         <Typography fontSize="large">Add Event</Typography>

@@ -39,7 +39,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar color="primary" position="sticky">
+    <AppBar sx={{backgroundColor: "#8c1515"}} position="sticky">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <TipsAndUpdatesOutlinedIcon
@@ -60,7 +60,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            EVENT RSVP
+            GATSVI EVENTS
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -93,13 +93,13 @@ function ResponsiveAppBar() {
               }}
             >
               <MenuItem onClick={handleCloseNavMenu}>
-                <Button>Home</Button>
+                <Button href="https://www.gatsvi.org/">Home</Button>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Button>About</Button>
+                <Button href="https://www.gatsvi.org/summer-application">About</Button>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
-                <Button>Groups</Button>
+                <Button href="https://www.gatsvi.org/groups">Groups</Button>
               </MenuItem>
             </Menu>
           </Box>
@@ -122,25 +122,25 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            Event App
+            GATSVI
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
-              href="#"
+              href="https://www.gatsvi.org/"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Home
             </Button>
             <Button
-              href="#"
+              href="https://www.gatsvi.org/summer-application"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               About
             </Button>
             <Button
-              href="#"
+              href="https://www.gatsvi.org/groups"
               onClick={handleCloseNavMenu}
               sx={{ my: 2, color: "white", display: "block" }}
             >

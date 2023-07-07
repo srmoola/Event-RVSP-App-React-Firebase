@@ -1,6 +1,6 @@
 import Skeleton from '@mui/material/Skeleton';
 
-const skeletonStyles = { marginLeft: "10px", width: { xl: "45%", md: "45%", xs: "95%" } };
+const skeletonStyles = { marginLeft: "10px", width: { xl: "45%", md: "45%", xs: "95%" }, backgroundColor: "#8c151547" };
 
 const SkeletonLoad = () => {
     return (<div key={crypto.randomUUID()} style={{ position: "relative", width: "100%", height: "375px", marginTop: "20px" }}>
@@ -10,18 +10,18 @@ const SkeletonLoad = () => {
             variant="rectangular"
             width="100%"
             height="100%"
-            sx={{ position: "absolute", top: 0, left: 0 }}
+            sx={{ position: "absolute", top: 0, left: 0, backgroundColor:"#8c151532" }}
         />
         <div style={{ position: "relative", zIndex: 1 }}>
             <br />
-            <Skeleton animation="wave" variant="text" width="20rem" height="50px" sx={{ marginLeft: "10px" }} />
-            <Skeleton animation="wave" variant="text" width="10rem" height="35px" sx={{ marginLeft: "10px" }} />
+            <Skeleton animation="wave" variant="text" width="20rem" height="50px" sx={{ backgroundColor:"#8c151564", marginLeft: "10px" }} />
+            <Skeleton animation="wave" variant="text" width="10rem" height="35px" sx={{ backgroundColor:"#8c151564", marginLeft: "10px" }} />
             <br />
             <Skeleton animation="wave" variant="text" height="35px" sx={skeletonStyles} />
             <Skeleton animation="wave" variant="text" height="35px" sx={skeletonStyles} />
             <Skeleton animation="wave" variant="text" height="35px" sx={skeletonStyles} />
             <br /><br /><br /> <br />
-            <Skeleton animation="wave" variant="rectangular" width="200px" height="50px" sx={{ marginLeft: "10px" }} />
+            <Skeleton animation="wave" variant="rectangular" width="200px" height="50px" sx={{ backgroundColor:"#8c151564", marginLeft: "10px" }} />
         </div>
     </div>)
 }
