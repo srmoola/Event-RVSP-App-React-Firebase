@@ -34,7 +34,7 @@ function App() {
   });
   const [eventList, setEventList] = useState<any>([]);
   const [shouldRender, setShouldRender] = useState(false);
-  const admins: string[] = ["smoolagani@gmail.com", "bigfishdev12@gmail.com"];
+  const admins: string[] = ["smoolagani@gmail.com", "bigfishdev12@gmail.com", "garv.jainn@gmail.com"];
   const [loading, setLoading] = useState(true);
   const skeletonCards: number[] = [0, 1, 2, 3];
 
