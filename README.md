@@ -1,21 +1,8 @@
+# Event RSVP Application with User Auth and Email Sign Up
 
-<a name="readme-top"></a>
+## Press on Image for Video Demo
 
-<br />
-<div align="center">
-
-  <h3 align="center">Event RSVP Application</h3>
-
-  <p align="center">
-    Fullstack Event RSVP Application with User Authentication and Email Confirmation
-   .
-    <br />
-    <br />
-    <a href="https://www.youtube.com/watch?v=vFMfsCsMeJ0">View Demo</a>
-
-  </p>
-</div>
-
+[![Video Demo](https://i3.ytimg.com/vi/vFMfsCsMeJ0/maxresdefault.jpg)](https://www.youtube.com/watch?v=vFMfsCsMeJ0)
 ### Built With
 
 
